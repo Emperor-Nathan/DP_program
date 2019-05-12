@@ -23,4 +23,4 @@ def getCounties(state, fips):
                 s += str(a)[n]
             n += 1
         s += ' county'
-        print('              \''+s+'\':'+str(a)[10]+str(a)[11]+str(a)[12]+str(a)[13]+str(a)[14]+',')
+        print('              \''+s+'\':'+str(int(str(a)[10]+str(a)[11]+str(a)[12]+str(a)[13]+str(a)[14]))+',')
