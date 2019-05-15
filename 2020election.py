@@ -3,7 +3,7 @@ from requests import get
 from tkinter import *
 from location_data import *
 tk = Tk()
-c = Canvas(tk, width=600, height=700)
+c = Canvas(tk, width=600, height=710)
 c.pack()
 tk.update()
 
@@ -107,59 +107,61 @@ questions=['Pro-Choice',
            'Same-sex marriage',
            'Transgender Military Service']
 
-candidates={'Be':0, 'Bi':0, 'Bo':0, 'Bu':0, 'Ca':0,
-            'De':0, 'Ga':0, 'Gi':0, 'Gr':0, 'Ha':0,
-            'Hi':0, 'In':0, 'Kl':0, 'Me':0,
-            'Mo':0, 'O\'':0, 'Ry':0, 'Sa':0, 'Sw':0,
-            'Wa':0, 'Wi':0, 'Ya':0}
+candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0,
+            'Del':0, 'Gab':0, 'Gil':0, 'Gra':0, 'Har':0,
+            'Hic':0, 'Ins':0, 'Klo':0, 'Mes':0,
+            'Mou':0, 'O\'R':0, 'Rya':0, 'San':0, 'Swa':0,
+            'War':0, 'Wil':0, 'Yan':0}
 
-experience={'Be':4365/21, 'Bi':2922/2+13161/21, 'Bo':2621/21+2740/71,
-            'Bu':2926/71, 'Ca':907/15+1877/71, 'De':2191/27,
-            'Ga':2922/27+720/109, 'Gi':4360/21+754/27, 'Gr':4383/21+1460/109,
-            'Ha':1461/21, 'Hi':2919/3+2731/71,
-            'In':2919/3+4825/27+730/27+1463/109, 'Kl':5114/21, 'Me':2121/71,
-            'Mo':2192/27, 'O\'':2191/27, 'Ry':6575/27+715/108,
-            'Sa':5114/21+5844/27+2920/71, 'Sw':2922/27, 'Wa':2922/21, 'Wi':0,
-            'Ya':0}
+experience={'Ben':4365/21, 'Bid':2922/2+13161/21, 'Boo':2621/21+2740/71, 'Bul':2919/3,
+            'But':2926/71, 'Cas':907/15+1877/71, 'Del':2191/27,
+            'Gab':2922/27+720/109, 'Gil':4360/21+754/27, 'Gra':4383/21+1460/109,
+            'Har':1461/21, 'Hic':2919/3+2731/71,
+            'Ins':2919/3+4825/27+730/27+1463/109, 'Klo':5114/21, 'Mes':2121/71,
+            'Mou':2192/27, 'O\'R':2191/27, 'Rya':6575/27+715/108,
+            'San':5114/21+5844/27+2920/71, 'Swa':2922/27, 'War':2922/21, 'Wil':0,
+            'Yan':0}
 
-candidate_names={'Be':'Michael Bennet', 'Bi':'Joe Biden', 'Bo':'Cory Booker',
-                 'Bu':'Pete Buttigieg', 'Ca':'Julián Castro',
-                 'De':'John Delaney', 'Ga':'Tulsi Gabbard',
-                 'Gi':'Kirsten Gillibrand', 'Gr':'Mike Gravel',
-                 'Ha':'Kamala Harris', 'Hi':'John Hickenlooper',
-                 'In':'Jay Inslee', 'Kl':'Amy Klobuchar', 'Me':'Wayne Messam',
-                 'Mo':'Seth Moulton',  'O\'':'Beto O\'Rourke', 'Ry':'Tim Ryan',
-                 'Sa':'Bernie Sanders', 'Sw':'Eric Swalwell',
-                 'Wa':'Elizabeth Warren', 'Wi':'Marianne Williamson',
-                 'Ya':'Andrew Yang'}
+candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
+                 'Bul':'Steve Bullock',
+                 'But':'Pete Buttigieg', 'Cas':'Julián Castro',
+                 'Del':'John Delaney', 'Gab':'Tulsi Gabbard',
+                 'Gil':'Kirsten Gillibrand', 'Gra':'Mike Gravel',
+                 'Har':'Kamala Harris', 'Hic':'John Hickenlooper',
+                 'Ins':'Jay Inslee', 'Klo':'Amy Klobuchar', 'Mes':'Wayne Messam',
+                 'Mou':'Seth Moulton',  'O\'R':'Beto O\'Rourke', 'Rya':'Tim Ryan',
+                 'San':'Bernie Sanders', 'Swa':'Eric Swalwell',
+                 'War':'Elizabeth Warren', 'Wil':'Marianne Williamson',
+                 'Yan':'Andrew Yang'}
 
-ages={'Be':20507, 'Bi':28551, 'Bo':18896, 'Bu':14246, 'Ca':16928, 'De':21099,
-      'Ga':14528, 'Gi':19766, 'Gr':33125, 'Ha':20546, 'Hi':25185, 'In':25548,
-      'Kl':22175, 'Me':17029, 'Mo':15429, 'O\'':17648, 'Ry':17355, 'Sa':28989,
-      'Sw':14736, 'Wa':26145, 'Wi':25033, 'Ya':16809}
+ages={'Ben':20507, 'Bid':28551, 'Boo':18896, 'Bul':20008, 'But':14246, 'Cas':16928, 'Del':21099,
+      'Gab':14528, 'Gil':19766, 'Gra':33125, 'Har':20546, 'Hic':25185, 'Ins':25548,
+      'Klo':22175, 'Mes':17029, 'Mou':15429, 'O\'R':17648, 'Rya':17355, 'San':28989,
+      'Swa':14736, 'War':26145, 'Wil':25033, 'Yan':16809}
 
-local = {'Be':[8, 8031, 820000, 801, 891007],
-         'Bi':[10, 10003, 1077580, 1001, 1093996],
-         'Bo':[34, 34013, 3451000, 0, 3451000],
-         'Bu':[18, 18141, 1871000, 1802, 0],
-         'Ca':[48, 0, 4865000, 0, 4865000],
-         'De':[24, 24031, 2463300, 2406, 0],
-         'Ga':[15, 15003, 0, 1502, 0],
-         'Gi':[36, 36021, 3635969, 3619, 3635969],
-         'Gr':[6, 6081, 609066, 614, 691370],
-         'Ha':[6, 6037, 644000, 0, 691750],
-         'Hi':[8, 8031, 820000, 801, 891007],
-         'In':[53, 53035, 5303736, 5306, 5390120],
-         'Kl':[27, 27053, 2744000, 2705, 2743000],
-         'Me':[12, 12011, 1245975, 1220, 1292236],
-         'Mo':[25, 25009, 2559105, 2506, 2559105],
-         'O\'':[48, 48141, 4824000, 4816, 4824000],
-         'Ry':[39, 39155, 3955196, 3913, 0],
-         'Sa':[50, 50007, 5010675, 5001, 5010675],
-         'Sw':[6, 6001, 620018, 615, 691660],
-         'Wa':[25, 25017, 2511000, 0, 2511000],
-         'Wi':[6, 6037, 0, 633, 0],
-         'Ya':[36, 36061, 3651000, 0, 3644919]}
+local = {'Ben':[8, 8031, 820000, 801, 891007],
+         'Bid':[10, 10003, 1077580, 1001, 1093996],
+         'Boo':[34, 34013, 3451000, 0, 3451000],
+         'Bul':[30, 30049, 3035600, 3001, 3091722],
+         'But':[18, 18141, 1871000, 1802, 0],
+         'Cas':[48, 0, 4865000, 0, 4865000],
+         'Del':[24, 24031, 2463300, 2406, 0],
+         'Gab':[15, 15003, 0, 1502, 0],
+         'Gil':[36, 36021, 3635969, 3619, 3635969],
+         'Gra':[6, 6081, 609066, 614, 691370],
+         'Har':[6, 6037, 644000, 0, 0],
+         'Hic':[8, 8031, 820000, 801, 891007],
+         'Ins':[53, 53035, 5303736, 5306, 5390120],
+         'Klo':[27, 27053, 2744000, 2705, 2743000],
+         'Mes':[12, 12011, 1245975, 1220, 1292236],
+         'Mou':[25, 25009, 2559105, 2506, 2559105],
+         'O\'R':[48, 48141, 4824000, 4816, 4824000],
+         'Rya':[39, 39155, 3955196, 3913, 0],
+         'San':[50, 50007, 5010675, 5001, 5010675],
+         'Swa':[6, 6001, 620018, 615, 691660],
+         'War':[25, 25017, 2511000, 0, 2511000],
+         'Wil':[6, 6037, 0, 633, 0],
+         'Yan':[36, 36061, 3651000, 0, 3644919]}
 
 priority=[71, 21, 5, 5]
 
@@ -292,12 +294,6 @@ def locate():
             break
         else:
             print('Invalid input.')
-    l = False
-    for a in local:
-        if local[a][1] == user_local[1]:
-            l = True
-    if not l:
-        return
     for a in auto[1]:
         if user_local[1] == a:
             for b in auto[1][a]:
@@ -308,21 +304,34 @@ def locate():
         if user_local[2] != 0:
             break
         s = input('Enter your city, town, village, or census-designated place. If you live outside one of these, enter "N/A". (Note: Do NOT enter a civil township. That will be dealt with later on.): ').lower()
-        if s in cities[user_local[0]]:
+        if s == 'N/A':
+            user_local[2] = -1
+        elif s in cities[user_local[0]]:
             user_local[2] = cities[user_local[0]][s]
             break
         else:
             print('Invalid input.')
-    l = False
-    for a in local:
-        if local[a][2] == user_local[2]:
-            l = True
-    if not l:
-        return
     for a in auto[2]:
         if user_local[2] == a:
             for b in auto[2][a]:
                 user_local[b] = auto[2][a][b]
+    if not (0 in user_local):
+        return
+    while True:
+        if user_local[3] != 0:
+            break
+        s = int(input('Enter your U.S. house district number: '))
+        if not isInt(s):
+            print('Invalid input.')
+        elif s >= 1 and s <= cds[user_local[0]]:
+            user_local[3] = user_local[0]*100+s
+            break
+        else:
+            print('Invalid input.')
+    for a in auto[3]:
+        if user_local[3] == a:
+            for b in auto[3][a]:
+                user_local[b] = auto[3][a][b]
     if not (0 in user_local):
         return
 
@@ -368,6 +377,7 @@ def getPreferences():
     del tables[len(tables)-1]
     del tables[len(tables)-1]
     del tables[len(tables)-1]
+    del tables[len(tables)-1]
     n = 0
     m = 0
     for a in tables:
@@ -379,7 +389,7 @@ def getPreferences():
             m = 0
             columns = b.find_all('td')
             del columns[1]
-            k = str(columns[0])[21] + str(columns[0])[22]
+            k = str(columns[0])[21] + str(columns[0])[22] + str(columns[0])[23]
             del columns[0]
             for d in columns:
                 v = 1
@@ -423,8 +433,8 @@ def printResults():
         c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(50-2*n)), text = str(n+1)+'. ')
         n+=1
 
-setPrefs()
-locate()
+#setPrefs()
+#locate()
 c.delete('all')
 tk.update()
 #takeQuiz()
