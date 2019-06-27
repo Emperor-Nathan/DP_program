@@ -19,8 +19,12 @@ def getCounties(state, fips):
         while str(a)[n] != '/':
             if str(a)[n] == '_':
                 s += ' '
+            elif n == 16 or str(a)[n-1] == '_':
+                s+=str(a)[n].upper()
             else:
                 s += str(a)[n]
             n += 1
-        s += ' county'
-        print('              \''+s+'\':'+str(int(str(a)[10]+str(a)[11]+str(a)[12]+str(a)[13]+str(a)[14]))+',')
+        s += ' County, '+state.upper()
+        print('          '+str(int(str(a)[10]+str(a)[11]+str(a)[12]+str(a)[13]+str(a)[14]))+':{name:\''+s+'\',')
+        print('                 alive:False,')
+        print('                 borders:[]},')

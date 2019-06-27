@@ -1659,7 +1659,7 @@ auto={0:{2:{3:201}, # Alaska
                3:801,
                4:891007},
          15001:{3:1502}, # Hawaii County, HI
-         15005:{2:-1, # Kalawao County, HI
+         15005:{2:0, # Kalawao County, HI
                 3:1502,
                 4:90990},
          15007:{3:1502}, # Kauai County, HI

@@ -3,64 +3,98 @@ from requests import get
 from tkinter import *
 from location_data import *
 tk = Tk()
-c = Canvas(tk, width=600, height=710)
+c = Canvas(tk, width=600, height=750)
 c.pack()
 tk.update()
 
 yes='ye'
 no='no'
 abstain='ab'
-
-issues=[yes, yes, abstain, yes, yes, yes, yes, yes, no, no, yes, yes, yes, yes,
-        yes, yes, yes, no, yes, yes, yes, yes, no, yes, yes, yes, yes, yes, yes,
-        no, yes, yes, yes, abstain, yes, yes, yes, yes, yes, yes, yes, abstain,
-        yes, yes, abstain, no, abstain, yes, yes, yes, yes, yes, yes, no, no,
-        no, yes, yes, yes, yes, abstain, yes, no, yes, yes, yes, no, yes, yes,
-        yes, yes]
+ 
+issues=[yes, yes, no, yes, yes, yes, #Education
+        yes, yes, yes, yes, yes, yes, yes, #Environmental issues
+        yes, yes, #Gun control
+        yes, yes, yes, no, #Health care
+        yes, #Technology
+        yes, yes, yes, yes, #Campaign finance
+        yes, yes, no, yes, yes, #Economics
+        no, yes, yes, yes, no, yes, #Labor and welfare issues
+        abstain, yes, yes, abstain, no, abstain, yes, #Foreign involvement
+        no, no, yes, yes, yes, yes, abstain, #Immigration and border security
+        yes, #Donald Trump
+        yes, yes, yes, no, yes, yes, yes, abstain, yes, #Electoral reform
+        yes, yes, abstain, no, #Abortion
+        yes, abstain, abstain, yes, yes, yes, yes, yes, #Criminal justice
+        yes, yes, yes] #LGBT issues
 
 user_local = [6, 6001, 626000, 615, 691070]
 
-categories=[['Abortion', 0, 2],
-            ['Campaign finance', 3, 6],
-            ['Criminal justice', 7, 14],
-            ['Economics', 15, 19],
-            ['Education', 20, 25],
-            ['Electoral reform', 26, 34],
-            ['Environmental issues and climate change', 35, 40],
-            ['Foreign policy', 41, 47],
-            ['Gun control', 48, 49],
-            ['Health care', 50, 53],
-            ['Immigration and border security', 54, 60],
-            ['Internet', 61, 61],
-            ['Labor and welfare issues', 62, 67],
-            ['LGBT issues', 68, 70]]
+categories=[['Education', 0, 5],
+            ['Environmental issues', 6, 12],
+            ['Gun control', 13, 14],
+            ['Health care', 15, 18],
+            ['Technology', 19, 19],
+            ['Campaign finance', 20, 23],
+            ['Economics', 24, 28],
+            ['Labor and welfare issues', 29, 34],
+            ['Foreign involvement', 35, 41],
+            ['Immigration and border security', 42, 48],
+            ['Donald Trump', 49, 49],
+            ['Electoral reform', 50, 59],
+            ['Abortion', 60, 63],
+            ['Criminal justice', 64, 70],
+            ['LGBT issues', 71, 73]]
 
-questions=['Pro-Choice',
-           'Contraceptive mandate',
-           'Fund Planned Parenthood',
-           'No Corporate PAC Donations',
-           'Overturn Citizens United',
-           'Publicly funded elections',
-           'Democracy vouchers',
-           'End Capital Punishment',
-           'Legalization of Marijuana',
-           'Expunging Cannabis Conviction Records',
-           'End Cash Bail',
-           'End Private Prisons',
-           'End Mandatory Minimum Sentencing for Nonviolent Drug Offenses',
-           'Job Placement Services for Released Offenders',
-           'Decriminalization of Sex Work',
-           'Estate Tax',
-           'Postal Banking',
-           'Reparations for Slavery',
-           'Wealth Tax',
-           'Breaking up the largest banks',
-           'Tuition-Free Public College',
+questions=['Tuition-Free Public College',
            'Debt relief for student debt',
            'Affirmative Action',
            'Universal Child Care',
            'Public Pre-Kindergarten',
            'Increase funding for primary and secondary public education',
+           'Green New Deal',
+           'No Fossil Fuel Money pledge',
+           'Nuclear Power to Reduce Emissions',
+           'Carbon Tax',
+           'Paris Agreement',
+           'Ban Fracking',
+           'Ban Offshore Drilling',
+           'Universal Background Checks',
+           'Ban Assault Weapons',
+           'Support Single-Payer Healthcare System',
+           'Support Public Health Insurance Option',
+           'Import Prescription Drugs from Canada',
+           'Support federal caps on medical malpractice lawsuits',
+           'Reinstate Net Neutrality',
+           'No Corporate PAC Donations',
+           'Overturn Citizens United',
+           'Publicly funded elections',
+           'Democracy vouchers',
+           'Estate Tax',
+           'Postal Banking',
+           'Reparations for Slavery',
+           'Wealth Tax',
+           'Breaking up the largest banks',
+           'Raise Minimum Wage',
+           'Basic Income',
+           'Paid Family Leave',
+           'Paid Sick Leave',
+           'Limit "right-to-work" laws',
+           'Job guarantee',
+           'Intervention in Syria',
+           'Iran Nuclear Deal',
+           'Recognize Juan Guadió as Interim President of Venezuela',
+           'Military Intervention in Venezuela',
+           'Intervention in Yemen',
+           'Drone Strikes',
+           'Decrease the annual military budget',
+           'Proposed Trump Border Wall',
+           'Trump Travel Ban',
+           'Support DACA',
+           'Allow More Visa Workers',
+           'Demilitarize Mexico-United States border',
+           'Invest in Ports of Entry',
+           'Abolish ICE',
+           'Impeachment of Donald Trump',
            'Abolish the Electoral College',
            'Abolish the filibuster',
            'Adoption of ranked-choice voting',
@@ -70,102 +104,85 @@ questions=['Pro-Choice',
            'End Felony Disenfranchisement',
            'Expand/Reform Supreme Court',
            'Make Election Day a federal holiday',
-           'Green New Deal',
-           'Nuclear Power to Reduce Emissions',
-           'Carbon Tax',
-           'Paris Agreement',
-           'Ban Fracking',
-           'Ban Offshore Drilling',
-           'Intervention in Syria',
-           'Iran Nuclear Deal',
-           'Recognize Juan Guadió as Interim President of Venezuela',
-           'Military Intervention in Venezuela',
-           'Intervention in Yemen',
-           'Drone Strikes',
-           'Decrease the annual military budget',
-           'Universal Background Checks',
-           'Ban Assault Weapons',
-           'Support Single-Payer Healthcare System',
-           'Support Public Health Insurance Option',
-           'Import Prescription Drugs from Canada',
-           'Support federal caps on medical malpractice lawsuits',
-           'Proposed Trump Border Wall',
-           'Trump Travel Ban',
-           'Support DACA',
-           'Allow More Visa Workers',
-           'Demilitarize Mexico-United States border',
-           'Invest in Ports of Entry',
-           'Abolish ICE',
-           'Reinstate Net Neutrality',
-           'Raise Minimum Wage',
-           'Basic Income',
-           'Paid Family Leave',
-           'Paid Sick Leave',
-           'Limit "right-to-work" laws',
-           'Job guarantee',
+           'Pro-Choice',
+           'Contraceptive mandate',
+           'Fund Planned Parenthood',
+           'Retain Hyde Amendment',
+           'End Capital Punishment',
+           'Legalization of Marijuana',
+           'Expunging Cannabis Conviction Records',
+           'End Cash Bail',
+           'End Private Prisons',
+           'End Mandatory Minimum Sentencing for Nonviolent Drug Offenses',
+           'Job Placement Services for Released Offenders',
+           'Decriminalization of Sex Work',
            'Laws against LGBT discrimination',
            'Same-sex marriage',
            'Transgender Military Service']
 
-candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0,
+candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
             'Del':0, 'Gab':0, 'Gil':0, 'Gra':0, 'Har':0,
             'Hic':0, 'Ins':0, 'Klo':0, 'Mes':0,
-            'Mou':0, 'O\'R':0, 'Rya':0, 'San':0, 'Swa':0,
+            'Mou':0, 'O\'R':0, 'Rya':0, 'San':0, 'Ses':0, 'Swa':0,
             'War':0, 'Wil':0, 'Yan':0}
 
 experience={'Ben':4365/21, 'Bid':2922/2+13161/21, 'Boo':2621/21+2740/71, 'Bul':2919/3,
-            'But':2926/71, 'Cas':907/15+1877/71, 'Del':2191/27,
+            'But':2926/71, 'Cas':907/15+1877/71, 'de ':2576/71, 'Del':2191/27,
             'Gab':2922/27+720/109, 'Gil':4360/21+754/27, 'Gra':4383/21+1460/109,
             'Har':1461/21, 'Hic':2919/3+2731/71,
             'Ins':2919/3+4825/27+730/27+1463/109, 'Klo':5114/21, 'Mes':2121/71,
             'Mou':2192/27, 'O\'R':2191/27, 'Rya':6575/27+715/108,
-            'San':5114/21+5844/27+2920/71, 'Swa':2922/27, 'War':2922/21, 'Wil':0,
+            'San':5114/21+5844/27+2920/71, 'Ses':1461/27, 'Swa':2922/27, 'War':2922/21, 'Wil':0,
             'Yan':0}
 
 candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
                  'Bul':'Steve Bullock',
                  'But':'Pete Buttigieg', 'Cas':'Julián Castro',
+                 'de ':'Bill de Blasio',
                  'Del':'John Delaney', 'Gab':'Tulsi Gabbard',
                  'Gil':'Kirsten Gillibrand', 'Gra':'Mike Gravel',
                  'Har':'Kamala Harris', 'Hic':'John Hickenlooper',
                  'Ins':'Jay Inslee', 'Klo':'Amy Klobuchar', 'Mes':'Wayne Messam',
                  'Mou':'Seth Moulton',  'O\'R':'Beto O\'Rourke', 'Rya':'Tim Ryan',
-                 'San':'Bernie Sanders', 'Swa':'Eric Swalwell',
+                 'San':'Bernie Sanders', 'Ses':'Joe Sestak', 'Swa':'Eric Swalwell',
                  'War':'Elizabeth Warren', 'Wil':'Marianne Williamson',
                  'Yan':'Andrew Yang'}
 
 ages={'Ben':20507, 'Bid':28551, 'Boo':18896, 'Bul':20008, 'But':14246, 'Cas':16928, 'Del':21099,
+      'de ':21807,
       'Gab':14528, 'Gil':19766, 'Gra':33125, 'Har':20546, 'Hic':25185, 'Ins':25548,
-      'Klo':22175, 'Mes':17029, 'Mou':15429, 'O\'R':17648, 'Rya':17355, 'San':28989,
+      'Klo':22175, 'Mes':17029, 'Mou':15429, 'O\'R':17648, 'Rya':17355, 'San':28989, 'Ses':25242,
       'Swa':14736, 'War':26145, 'Wil':25033, 'Yan':16809}
 
 local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Bid':[10, 10003, 1077580, 1001, 1093996],
-         'Boo':[34, 34013, 3451000, 0, 3451000],
+         'Boo':[34, 34013, 3451000, -1, 3451000],
          'Bul':[30, 30049, 3035600, 3001, 3091722],
-         'But':[18, 18141, 1871000, 1802, 0],
-         'Cas':[48, 0, 4865000, 0, 4865000],
-         'Del':[24, 24031, 2463300, 2406, 0],
-         'Gab':[15, 15003, 0, 1502, 0],
+         'But':[18, 18141, 1871000, 1802, -1],
+         'Cas':[48, -1, 4865000, -1, 4865000],
+         'de ':[36, 36047, 3651000, -1, 3610022],
+         'Del':[24, 24031, 2463300, 2406, -1],
+         'Gab':[15, 15003, -1, 1502, -1],
          'Gil':[36, 36021, 3635969, 3619, 3635969],
          'Gra':[6, 6081, 609066, 614, 691370],
-         'Har':[6, 6037, 644000, 0, 0],
+         'Har':[6, 6037, 644000, -1, -1],
          'Hic':[8, 8031, 820000, 801, 891007],
          'Ins':[53, 53035, 5303736, 5306, 5390120],
          'Klo':[27, 27053, 2744000, 2705, 2743000],
          'Mes':[12, 12011, 1245975, 1220, 1292236],
          'Mou':[25, 25009, 2559105, 2506, 2559105],
          'O\'R':[48, 48141, 4824000, 4816, 4824000],
-         'Rya':[39, 39155, 3955196, 3913, 0],
+         'Rya':[39, 39155, 3955196, 3913, -1],
          'San':[50, 50007, 5010675, 5001, 5010675],
+         'Ses':[42, -1, -1, -1, -1],
          'Swa':[6, 6001, 620018, 615, 691660],
-         'War':[25, 25017, 2511000, 0, 2511000],
-         'Wil':[6, 6037, 0, 633, 0],
-         'Yan':[36, 36061, 3651000, 0, 3644919]}
+         'War':[25, 25017, 2511000, -1, 2511000],
+         'Wil':[6, 6037, -1, 633, -1],
+         'Yan':[36, 36061, 3651000, -1, 3644919]}
 
-priority=[71, 21, 5, 5]
+priority=[len(questions), 21, 5, 5]
 
-ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 preference=[]
 
@@ -206,7 +223,7 @@ def setIdePrefs():
     n = 0
     printIdeSettings()
     while True:
-        n = input('Type the number of what you want to set.\n0. Continue\n1. Abortion\n2. Campaign finance\n3. Criminal justice\n4. Economics\n5. Education\n6. Electoral reform\n7. Environmental issues and climate change\n8. Foreign policy\n9. Gun control\n10. Health care\n11. Immigration and border security\n12. Internet\n13. Labor and welfare issues\n14. LGBT issues\n')
+        n = input('Type the number of what you want to set.\n0. Continue\n1. Abortion\n2. Campaign finance\n4. Donald Trump\n5. Criminal justice\n6. Economics\n7. Education\n8. Electoral reform\n9. Environmental issues and climate change\n10. Foreign policy\n11. Gun control\n10. Health care\n12. Immigration and border security\n13. Internet\n14. Labor and welfare issues\n15. LGBT issues\n')
         if not isInt(n):
             print('Invalid input.')
         else:
@@ -214,7 +231,7 @@ def setIdePrefs():
             printIdeSettings()
             if n == 0:
                 break
-            elif n > 0 and n < 15:
+            elif n > 0 and n < 16:
                 a = input('Enter weight: ')
                 if isInt(a):
                     ide_priority[n-1] = int(a)
@@ -305,7 +322,7 @@ def locate():
             break
         s = input('Enter your city, town, village, or census-designated place. If you live outside one of these, enter "N/A". (Note: Do NOT enter a civil township. That will be dealt with later on.): ').lower()
         if s == 'N/A':
-            user_local[2] = -1
+            user_local[2] = 0
         elif s in cities[user_local[0]]:
             user_local[2] = cities[user_local[0]][s]
             break
@@ -338,7 +355,7 @@ def locate():
 def takeQuiz():
     n = 0
     print('For each question, type "yes", "no", or "abstain". Typing "y" or "n" will also suffice. This is not case-sensitive.\n')
-    while n < 71:
+    while n < 72:
         a = input(questions[n] + ': ')
         if a.lower() == 'yes' or a.lower() == 'y':
             issues[n] = yes
@@ -377,7 +394,7 @@ def getPreferences():
     del tables[len(tables)-1]
     del tables[len(tables)-1]
     del tables[len(tables)-1]
-    del tables[len(tables)-1]
+    #del tables[len(tables)-1]
     n = 0
     m = 0
     for a in tables:
@@ -404,7 +421,7 @@ def getPreferences():
                     candidates[k] -= v
                 m += 1
     for a in candidates:
-        candidates[a] *= priority[0]/71
+        candidates[a] *= priority[0]/len(questions)
         candidates[a] += (experience[a]/100)*(priority[1]/21)
         candidates[a] -= (ages[a]/7300)*(priority[2]/5)
         y = 0
