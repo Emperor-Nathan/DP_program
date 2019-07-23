@@ -3,7 +3,7 @@ from requests import get
 from tkinter import *
 from location_data import *
 tk = Tk()
-c = Canvas(tk, width=600, height=750)
+c = Canvas(tk, width=700, height=800)
 c.pack()
 tk.update()
 
@@ -14,13 +14,13 @@ abstain='ab'
 issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, yes, yes, yes, yes, #Environmental issues
         yes, yes, #Gun control
-        yes, yes, yes, no, #Health care
+        yes, yes, yes, #Health care
         yes, #Technology
         yes, yes, yes, yes, #Campaign finance
         yes, yes, no, yes, yes, #Economics
         no, yes, yes, yes, no, yes, #Labor and welfare issues
         abstain, yes, yes, abstain, no, abstain, yes, #Foreign involvement
-        no, no, yes, yes, yes, yes, abstain, #Immigration and border security
+        no, no, yes, yes, yes, yes, abstain, yes, #Immigration and border security
         yes, #Donald Trump
         yes, yes, yes, no, yes, yes, yes, abstain, yes, #Electoral reform
         yes, yes, abstain, no, #Abortion
@@ -32,18 +32,18 @@ user_local = [6, 6001, 626000, 615, 691070]
 categories=[['Education', 0, 5],
             ['Environmental issues', 6, 12],
             ['Gun control', 13, 14],
-            ['Health care', 15, 18],
-            ['Technology', 19, 19],
-            ['Campaign finance', 20, 23],
-            ['Economics', 24, 28],
-            ['Labor and welfare issues', 29, 34],
-            ['Foreign involvement', 35, 41],
-            ['Immigration and border security', 42, 48],
-            ['Donald Trump', 49, 49],
-            ['Electoral reform', 50, 59],
-            ['Abortion', 60, 63],
-            ['Criminal justice', 64, 70],
-            ['LGBT issues', 71, 73]]
+            ['Health care', 15, 19],
+            ['Technology', 20, 20],
+            ['Campaign finance', 21, 24],
+            ['Economics', 25, 29],
+            ['Labor and welfare issues', 30, 35],
+            ['Foreign involvement', 36, 42],
+            ['Immigration and border security', 43, 49],
+            ['Donald Trump', 50, 50],
+            ['Electoral reform', 51, 60],
+            ['Abortion', 61, 64],
+            ['Criminal justice', 65, 71],
+            ['LGBT issues', 72, 74]]
 
 questions=['Tuition-Free Public College',
            'Debt relief for student debt',
@@ -63,7 +63,6 @@ questions=['Tuition-Free Public College',
            'Support Single-Payer Healthcare System',
            'Support Public Health Insurance Option',
            'Import Prescription Drugs from Canada',
-           'Support federal caps on medical malpractice lawsuits',
            'Reinstate Net Neutrality',
            'No Corporate PAC Donations',
            'Overturn Citizens United',
@@ -94,6 +93,7 @@ questions=['Tuition-Free Public College',
            'Demilitarize Mexico-United States border',
            'Invest in Ports of Entry',
            'Abolish ICE',
+           'Decriminalize entering the US illegally',
            'Impeachment of Donald Trump',
            'Abolish the Electoral College',
            'Abolish the filibuster',
@@ -123,16 +123,18 @@ questions=['Tuition-Free Public College',
 candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
             'Del':0, 'Gab':0, 'Gil':0, 'Gra':0, 'Har':0,
             'Hic':0, 'Ins':0, 'Klo':0, 'Mes':0,
-            'Mou':0, 'O\'R':0, 'Rya':0, 'San':0, 'Ses':0, 'Swa':0,
+            'Mou':0, 'Oje':0, 'O\'R':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
             'War':0, 'Wil':0, 'Yan':0}
+
+withdrawn = ['Richard Ojeda', 'Eric Swalwell']
 
 experience={'Ben':4365/21, 'Bid':2922/2+13161/21, 'Boo':2621/21+2740/71, 'Bul':2919/3,
             'But':2926/71, 'Cas':907/15+1877/71, 'de ':2576/71, 'Del':2191/27,
             'Gab':2922/27+720/109, 'Gil':4360/21+754/27, 'Gra':4383/21+1460/109,
             'Har':1461/21, 'Hic':2919/3+2731/71,
             'Ins':2919/3+4825/27+730/27+1463/109, 'Klo':5114/21, 'Mes':2121/71,
-            'Mou':2192/27, 'O\'R':2191/27, 'Rya':6575/27+715/108,
-            'San':5114/21+5844/27+2920/71, 'Ses':1461/27, 'Swa':2922/27, 'War':2922/21, 'Wil':0,
+            'Mou':2192/27, 'Oje':774/108, 'O\'R':2191/27, 'Rya':6575/27+715/108,
+            'San':5114/21+5844/27+2920/71, 'Ses':1461/27, 'Ste':0, 'Swa':2922/27, 'War':2922/21, 'Wil':0,
             'Yan':0}
 
 candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
@@ -143,16 +145,16 @@ candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
                  'Gil':'Kirsten Gillibrand', 'Gra':'Mike Gravel',
                  'Har':'Kamala Harris', 'Hic':'John Hickenlooper',
                  'Ins':'Jay Inslee', 'Klo':'Amy Klobuchar', 'Mes':'Wayne Messam',
-                 'Mou':'Seth Moulton',  'O\'R':'Beto O\'Rourke', 'Rya':'Tim Ryan',
-                 'San':'Bernie Sanders', 'Ses':'Joe Sestak', 'Swa':'Eric Swalwell',
+                 'Mou':'Seth Moulton',  'Oje':'Richard Ojeda', 'O\'R':'Beto O\'Rourke', 'Rya':'Tim Ryan',
+                 'San':'Bernie Sanders', 'Ses':'Joe Sestak', 'Ste':'Tom Steyer', 'Swa':'Eric Swalwell',
                  'War':'Elizabeth Warren', 'Wil':'Marianne Williamson',
                  'Yan':'Andrew Yang'}
 
 ages={'Ben':20507, 'Bid':28551, 'Boo':18896, 'Bul':20008, 'But':14246, 'Cas':16928, 'Del':21099,
       'de ':21807,
       'Gab':14528, 'Gil':19766, 'Gra':33125, 'Har':20546, 'Hic':25185, 'Ins':25548,
-      'Klo':22175, 'Mes':17029, 'Mou':15429, 'O\'R':17648, 'Rya':17355, 'San':28989, 'Ses':25242,
-      'Swa':14736, 'War':26145, 'Wil':25033, 'Yan':16809}
+      'Klo':22175, 'Mes':17029, 'Mou':15429, 'Oje':18380, 'O\'R':17648, 'Rya':17355, 'San':28989, 'Ses':25242, 'Ste':23218, 'Swa':14675,
+      'War':26145, 'Wil':25033, 'Yan':16809}
 
 local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Bid':[10, 10003, 1077580, 1001, 1093996],
@@ -171,13 +173,15 @@ local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Klo':[27, 27053, 2744000, 2705, 2743000],
          'Mes':[12, 12011, 1245975, 1220, 1292236],
          'Mou':[25, 25009, 2559105, 2506, 2559105],
+         'Oje':[54, -1, -1, 5403, -1],
          'O\'R':[48, 48141, 4824000, 4816, 4824000],
          'Rya':[39, 39155, 3955196, 3913, -1],
          'San':[50, 50007, 5010675, 5001, 5010675],
          'Ses':[42, -1, -1, -1, -1],
          'Swa':[6, 6001, 620018, 615, 691660],
+         'Ste':[6, -1, -1, -1, -1],
          'War':[25, 25017, 2511000, -1, 2511000],
-         'Wil':[6, 6037, -1, 633, -1],
+         'Wil':[19, -1, 1921000, 1903, -1],
          'Yan':[36, 36061, 3651000, -1, 3644919]}
 
 priority=[len(questions), 21, 5, 5]
@@ -394,7 +398,6 @@ def getPreferences():
     del tables[len(tables)-1]
     del tables[len(tables)-1]
     del tables[len(tables)-1]
-    #del tables[len(tables)-1]
     n = 0
     m = 0
     for a in tables:
@@ -407,19 +410,20 @@ def getPreferences():
             columns = b.find_all('td')
             del columns[1]
             k = str(columns[0])[21] + str(columns[0])[22] + str(columns[0])[23]
-            del columns[0]
-            for d in columns:
-                v = 1
-                q = 0
-                while q < len(categories):
-                    if n+m >= categories[q][1] and n+m <= categories[q][2]:
-                        v *= ide_priority[q]
-                    q += 1
-                if str(d)[17]+str(d)[18] == issues[n+m]:
-                    candidates[k] += v
-                elif (str(d)[17]+str(d)[18] == no and issues[n+m]==yes) or (str(d)[17]+str(d)[18]==yes and issues[n+m]==no):
-                    candidates[k] -= v
-                m += 1
+            if k in candidates:
+                del columns[0]
+                for d in columns:
+                    v = 1
+                    q = 0
+                    while q < len(categories):
+                        if n+m >= categories[q][1] and n+m <= categories[q][2]:
+                            v *= ide_priority[q]
+                        q += 1
+                    if str(d)[17]+str(d)[18] == issues[n+m]:
+                        candidates[k] += v
+                    elif (str(d)[17]+str(d)[18] == no and issues[n+m]==yes) or (str(d)[17]+str(d)[18]==yes and issues[n+m]==no):
+                        candidates[k] -= v
+                    m += 1
     for a in candidates:
         candidates[a] *= priority[0]/len(questions)
         candidates[a] += (experience[a]/100)*(priority[1]/21)
@@ -439,23 +443,27 @@ def sum_notation(x):
     n = 1
     r = 0
     while n < x:
-        r += 55 - 2*n
+        r += 56 - 1.9*n
         n+=1
     return r
 
 def printResults():
     n = 0
     while n < len(preference):
-        c.create_text(300, sum_notation(n+1), anchor=N, font=('Helvetica', int(50-2*n)), text = preference[n][0])
-        c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(50-2*n)), text = str(n+1)+'. ')
+        if preference[n][0] in withdrawn:
+            c.create_text(350, sum_notation(n+1), anchor=N, font=('Helvetica', int(55-1.9*n)), text = preference[n][0], fill='red')
+            c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(55-1.9*n)), text = str(n+1)+'. ', fill='red')
+        else:
+            c.create_text(350, sum_notation(n+1), anchor=N, font=('Helvetica', int(55-1.9*n)), text = preference[n][0])
+            c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(55-1.9*n)), text = str(n+1)+'. ')
         n+=1
 
-#setPrefs()
+setPrefs()
 #locate()
 c.delete('all')
 tk.update()
 #takeQuiz()
-c.create_text(300, 350, font=('Helvetica', 50), text='Processing...')
+c.create_text(350, 400, font=('Helvetica', 50), text='Processing...')
 tk.update()
 getPreferences()
 printResults()
