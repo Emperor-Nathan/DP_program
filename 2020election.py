@@ -13,112 +13,116 @@ abstain='ab'
  
 issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, yes, yes, yes, yes, #Environmental issues
-        yes, yes, #Gun control
+        yes, yes, yes, #Gun control
         yes, yes, yes, #Health care
         yes, #Technology
-        yes, yes, yes, yes, #Campaign finance
         yes, yes, no, yes, yes, #Economics
         no, yes, yes, yes, no, yes, #Labor and welfare issues
         abstain, yes, yes, abstain, no, abstain, yes, #Foreign involvement
         no, no, yes, yes, yes, yes, abstain, yes, #Immigration and border security
         yes, #Donald Trump
         yes, yes, yes, no, yes, yes, yes, abstain, yes, #Electoral reform
+        yes, yes, yes, yes, #Campaign finance
         yes, yes, abstain, no, #Abortion
         yes, abstain, abstain, yes, yes, yes, yes, yes, #Criminal justice
-        yes, yes, yes] #LGBT issues
+        yes, yes, yes, #LGBT issues
+        yes] #Candidate solidarity
 
 user_local = [6, 6001, 626000, 615, 691070]
 
 categories=[['Education', 0, 5],
             ['Environmental issues', 6, 12],
-            ['Gun control', 13, 14],
-            ['Health care', 15, 19],
-            ['Technology', 20, 20],
-            ['Campaign finance', 21, 24],
-            ['Economics', 25, 29],
-            ['Labor and welfare issues', 30, 35],
-            ['Foreign involvement', 36, 42],
-            ['Immigration and border security', 43, 49],
-            ['Donald Trump', 50, 50],
-            ['Electoral reform', 51, 60],
-            ['Abortion', 61, 64],
-            ['Criminal justice', 65, 71],
-            ['LGBT issues', 72, 74]]
+            ['Gun control', 13, 15],
+            ['Health care', 16, 18],
+            ['Technology', 19, 19],
+            ['Economics', 20, 24],
+            ['Labor and welfare issues', 25, 30],
+            ['Foreign involvement', 31, 37],
+            ['Immigration and border security', 38, 45],
+            ['Donald Trump', 46, 46],
+            ['Electoral reform', 47, 55],
+            ['Campaign finance', 56, 59],
+            ['Abortion', 60, 63],
+            ['Criminal justice', 64, 71],
+            ['LGBT issues', 72, 74],
+            ['Candidate solidarity', 75, 75]]
 
-questions=['Tuition-Free Public College',
-           'Debt relief for student debt',
-           'Affirmative Action',
-           'Universal Child Care',
-           'Public Pre-Kindergarten',
-           'Increase funding for primary and secondary public education',
-           'Green New Deal',
-           'No Fossil Fuel Money pledge',
-           'Nuclear Power to Reduce Emissions',
-           'Carbon Tax',
-           'Paris Agreement',
-           'Ban Fracking',
-           'Ban Offshore Drilling',
-           'Universal Background Checks',
-           'Ban Assault Weapons',
-           'Support Single-Payer Healthcare System',
-           'Support Public Health Insurance Option',
-           'Import Prescription Drugs from Canada',
-           'Reinstate Net Neutrality',
-           'No Corporate PAC Donations',
-           'Overturn Citizens United',
-           'Publicly funded elections',
-           'Democracy vouchers',
-           'Estate Tax',
-           'Postal Banking',
-           'Reparations for Slavery',
-           'Wealth Tax',
-           'Breaking up the largest banks',
-           'Raise Minimum Wage',
-           'Basic Income',
-           'Paid Family Leave',
-           'Paid Sick Leave',
-           'Limit "right-to-work" laws',
-           'Job guarantee',
-           'Intervention in Syria',
-           'Iran Nuclear Deal',
-           'Recognize Juan Guadió as Interim President of Venezuela',
-           'Military Intervention in Venezuela',
-           'Intervention in Yemen',
-           'Drone Strikes',
-           'Decrease the annual military budget',
-           'Proposed Trump Border Wall',
-           'Trump Travel Ban',
-           'Support DACA',
-           'Allow More Visa Workers',
-           'Demilitarize Mexico-United States border',
-           'Invest in Ports of Entry',
-           'Abolish ICE',
-           'Decriminalize entering the US illegally',
-           'Impeachment of Donald Trump',
-           'Abolish the Electoral College',
-           'Abolish the filibuster',
-           'Adoption of ranked-choice voting',
-           'Ban Voter ID Laws',
-           'District of Columbia statehood',
-           'Puerto Rico statehood',
-           'End Felony Disenfranchisement',
-           'Expand/Reform Supreme Court',
-           'Make Election Day a federal holiday',
-           'Pro-Choice',
-           'Contraceptive mandate',
-           'Fund Planned Parenthood',
-           'Retain Hyde Amendment',
-           'End Capital Punishment',
-           'Legalization of Marijuana',
-           'Expunging Cannabis Conviction Records',
-           'End Cash Bail',
-           'End Private Prisons',
-           'End Mandatory Minimum Sentencing for Nonviolent Drug Offenses',
-           'Job Placement Services for Released Offenders',
-           'Decriminalization of Sex Work',
+questions=['Tuition-Free Public College', #Education
+           'Debt relief for student loans', #Education
+           'Affirmative Action', #Education
+           'Universal Child Care', #Education
+           'Public Pre-Kindergarten', #Education
+           'Increase funding for primary and secondary public education', #Education
+           'Green New Deal', #Environment
+           'No Fossil Fuel Money pledge', #Environment
+           'Nuclear Power to Reduce Emissions', #Environment
+           'Carbon Tax', #Environment
+           'Paris Agreement', #Environment
+           'Ban Fracking', #Environment
+           'Ban Offshore Drilling', #Environment
+           'Universal Background Checks', #Gun
+           'Ban Assault Weapons', #Gun
+           'Mandatory gun buybacks', #Gun
+           'Support Single-Payer Healthcare System', #Health
+           'Support Public Health Insurance Option', #Health
+           'Import Prescription Drugs from Canada', #Health
+           'Reinstate Net Neutrality', #Technology
+           'Estate Tax', #Economics
+           'Postal Banking', #Economics
+           'Reparations for Slavery', #Economics
+           'Wealth Tax', #Economics
+           'Breaking up the largest banks', #Economics
+           'Raise Minimum Wage', #Labor
+           'Basic Income', #Labor
+           'Paid Family Leave', #Labor
+           'Paid Sick Leave', #Labor
+           'Limit "right-to-work" laws', #Labor
+           'Job guarantee', #Labor
+           'Intervention in Syria', #Foreign
+           'Iran Nuclear Deal', #Foreign
+           'Recognize Juan Guadió as Interim President of Venezuela', #Foreign
+           'Military Intervention in Venezuela', #Foreign
+           'Intervention in Yemen', #Foreign
+           'Drone Strikes', #Foreign
+           'Decrease the annual military budget', #Foreign
+           'Proposed Trump Border Wall', #Immigration
+           'Trump Travel Ban', #Immigration
+           'Support DACA', #Immigration
+           'Allow More Visa Workers', #Immigration
+           'Demilitarize Mexico-United States border', #Immigration
+           'Invest in Ports of Entry', #Immigration
+           'Abolish ICE', #Immigration
+           'Decriminalize entering the US illegally', #Immigration
+           'Impeachment of Donald Trump', #Trump
+           'Abolish the Electoral College', #Electoral
+           'Abolish the filibuster', #Electoral
+           'Adoption of ranked-choice voting', #Electoral
+           'Ban Voter ID Laws', #Electoral
+           'District of Columbia statehood', #Electoral
+           'Puerto Rico statehood', #Electoral
+           'End Felony Disenfranchisement', #Electoral
+           'Expand/Reform Supreme Court', #Electoral
+           'Make Election Day a federal holiday', #Electoral
+           'No Corporate PAC Donations', #Campaign finance
+           'Overturn Citizens United', #Campaign finance
+           'Publicly funded elections', #Campaign finance
+           'Democracy vouchers', #Campaign finance
+           'Support right to abortion', #Abortion
+           'Contraceptive mandate', #Abortion
+           'Fund Planned Parenthood', #Abortion
+           'Retain Hyde Amendment', #Abortion
+           'End Capital Punishment', #Criminal
+           'Legalization of Marijuana', #Criminal
+           'Expunging Cannabis Conviction Records', #Criminal
+           'End Cash Bail', #Criminal
+           'End Private Prisons', #Criminal
+           'End Mandatory Minimum Sentencing for Nonviolent Drug Offenses', #Criminal
+           'Job Placement Services for Released Offenders', #Criminal
+           'Decriminalization of Sex Work', #Criminal
            'Laws against LGBT discrimination',
            'Same-sex marriage',
-           'Transgender Military Service']
+           'Transgender Military Service',
+           'Support the eventual Democratic nominee']
 
 candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
             'Del':0, 'Gab':0, 'Gil':0, 'Gra':0, 'Har':0,
@@ -126,7 +130,7 @@ candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
             'Mou':0, 'Oje':0, 'O\'R':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
             'War':0, 'Wil':0, 'Yan':0}
 
-withdrawn = ['Richard Ojeda', 'Eric Swalwell']
+withdrawn = []
 
 experience={'Ben':4365/21, 'Bid':2922/2+13161/21, 'Boo':2621/21+2740/71, 'Bul':2919/3,
             'But':2926/71, 'Cas':907/15+1877/71, 'de ':2576/71, 'Del':2191/27,
@@ -178,15 +182,22 @@ local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Rya':[39, 39155, 3955196, 3913, -1],
          'San':[50, 50007, 5010675, 5001, 5010675],
          'Ses':[42, -1, -1, -1, -1],
-         'Swa':[6, 6001, 620018, 615, 691660],
          'Ste':[6, -1, -1, -1, -1],
+         'Swa':[6, 6001, 620018, 615, 691660],
          'War':[25, 25017, 2511000, -1, 2511000],
          'Wil':[19, -1, 1921000, 1903, -1],
          'Yan':[36, 36061, 3651000, -1, 3644919]}
 
+#==BEGIN==
+abcounttotal = {'Ben':0,'Bid':0,'Boo':0,'Bul':0,'But':0,'Cas':0,'de ':0,'Del':0,
+                'Gab':0,'Gil':0,'Gra':0,'Har':0,'Hic':0,'Ins':0,'Klo':0,'Mes':0,
+                'Mou':0,'Oje':0,'O\'R':0,'Rya':0,'San':0,'Ses':0,'Ste':0,'Swa':0,
+                'War':0,'Wil':0,'Yan':0}
+#==END==
+
 priority=[len(questions), 21, 5, 5]
 
-ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 preference=[]
 
@@ -227,7 +238,13 @@ def setIdePrefs():
     n = 0
     printIdeSettings()
     while True:
-        n = input('Type the number of what you want to set.\n0. Continue\n1. Abortion\n2. Campaign finance\n4. Donald Trump\n5. Criminal justice\n6. Economics\n7. Education\n8. Electoral reform\n9. Environmental issues and climate change\n10. Foreign policy\n11. Gun control\n10. Health care\n12. Immigration and border security\n13. Internet\n14. Labor and welfare issues\n15. LGBT issues\n')
+        s='Type the number of what you want to set.\n0. Continue'
+        q=0
+        while q<len(categories):
+            s+='\n'+str(q+1)+'. '+categories[q][0]
+            q+=1
+        s+='\n'
+        n = input(s)
         if not isInt(n):
             print('Invalid input.')
         else:
@@ -408,8 +425,10 @@ def getPreferences():
         for b in rows:
             m = 0
             columns = b.find_all('td')
-            del columns[1]
             k = str(columns[0])[21] + str(columns[0])[22] + str(columns[0])[23]
+            if 'Withdrawn' in str(columns[1]):
+                withdrawn.append(candidate_names[k])
+            del columns[1]
             if k in candidates:
                 del columns[0]
                 for d in columns:
@@ -422,7 +441,10 @@ def getPreferences():
                     if str(d)[17]+str(d)[18] == issues[n+m]:
                         candidates[k] += v
                     elif (str(d)[17]+str(d)[18] == no and issues[n+m]==yes) or (str(d)[17]+str(d)[18]==yes and issues[n+m]==no):
-                        candidates[k] -= v
+                        candidates[k] -= v #==BEGIN==
+                    elif str(d)[17]+str(d)[18] != 'pa':
+                        abcounttotal[k]+=1
+                    #==END==
                     m += 1
     for a in candidates:
         candidates[a] *= priority[0]/len(questions)
