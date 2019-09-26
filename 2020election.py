@@ -2,8 +2,14 @@ from bs4 import BeautifulSoup
 from requests import get
 from tkinter import *
 from location_data import *
+
+#ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+ide_priority=[2.0, 3.0, 2.0, 2.5, 2.0, 1, 1.5, 2.0, 2.0, 1.5, 0.5, 3.0, 2.0, 2.0, 2.0, 2.0, 1]
+
+preference=[]
+
 tk = Tk()
-c = Canvas(tk, width=700, height=800)
+c = Canvas(tk, width=700, height=50 * len(ide_priority))
 c.pack()
 tk.update()
 
@@ -15,14 +21,15 @@ issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, yes, yes, yes, yes, #Environmental issues
         yes, yes, yes, #Gun control
         yes, yes, yes, #Health care
-        yes, #Technology
-        yes, yes, no, yes, yes, #Economics
-        no, yes, yes, yes, no, yes, #Labor and welfare issues
-        abstain, yes, yes, abstain, no, abstain, yes, #Foreign involvement
         no, no, yes, yes, yes, yes, abstain, yes, #Immigration and border security
+        yes, #Technology
+        yes, yes, no, yes, yes, yes, #Economics
+        no, yes, yes, yes, no, yes, #Labor and welfare issues
+        yes, yes, yes, abstain, abstain, abstain, yes, #Foreign policy
+        abstain, abstain, abstain, no, abstain, yes, #Defense
         yes, #Donald Trump
         yes, yes, yes, no, yes, yes, yes, abstain, yes, #Electoral reform
-        yes, yes, yes, yes, #Campaign finance
+        yes, yes, yes, yes, yes, #Campaign finance
         yes, yes, abstain, no, #Abortion
         yes, abstain, abstain, yes, yes, yes, yes, yes, #Criminal justice
         yes, yes, yes, #LGBT issues
@@ -34,18 +41,19 @@ categories=[['Education', 0, 5],
             ['Environmental issues', 6, 12],
             ['Gun control', 13, 15],
             ['Health care', 16, 18],
-            ['Technology', 19, 19],
-            ['Economics', 20, 24],
-            ['Labor and welfare issues', 25, 30],
-            ['Foreign involvement', 31, 37],
-            ['Immigration and border security', 38, 45],
-            ['Donald Trump', 46, 46],
-            ['Electoral reform', 47, 55],
-            ['Campaign finance', 56, 59],
-            ['Abortion', 60, 63],
-            ['Criminal justice', 64, 71],
-            ['LGBT issues', 72, 74],
-            ['Candidate solidarity', 75, 75]]
+            ['Immigration and border security', 19, 26],
+            ['Technology', 27, 27],
+            ['Economics', 28, 33],
+            ['Labor and welfare issues', 34, 39],
+            ['Foreign policy', 40, 46],
+            ['Defense', 47, 52],
+            ['Donald Trump', 53, 53],
+            ['Electoral reform', 54, 62],
+            ['Campaign finance', 63, 67],
+            ['Abortion', 68, 71],
+            ['Criminal justice', 72, 79],
+            ['LGBT issues', 80, 82],
+            ['Candidate solidarity', 83, 83]]
 
 questions=['Tuition-Free Public College', #Education
            'Debt relief for student loans', #Education
@@ -66,25 +74,6 @@ questions=['Tuition-Free Public College', #Education
            'Support Single-Payer Healthcare System', #Health
            'Support Public Health Insurance Option', #Health
            'Import Prescription Drugs from Canada', #Health
-           'Reinstate Net Neutrality', #Technology
-           'Estate Tax', #Economics
-           'Postal Banking', #Economics
-           'Reparations for Slavery', #Economics
-           'Wealth Tax', #Economics
-           'Breaking up the largest banks', #Economics
-           'Raise Minimum Wage', #Labor
-           'Basic Income', #Labor
-           'Paid Family Leave', #Labor
-           'Paid Sick Leave', #Labor
-           'Limit "right-to-work" laws', #Labor
-           'Job guarantee', #Labor
-           'Intervention in Syria', #Foreign
-           'Iran Nuclear Deal', #Foreign
-           'Recognize Juan Guadió as Interim President of Venezuela', #Foreign
-           'Military Intervention in Venezuela', #Foreign
-           'Intervention in Yemen', #Foreign
-           'Drone Strikes', #Foreign
-           'Decrease the annual military budget', #Foreign
            'Proposed Trump Border Wall', #Immigration
            'Trump Travel Ban', #Immigration
            'Support DACA', #Immigration
@@ -93,6 +82,32 @@ questions=['Tuition-Free Public College', #Education
            'Invest in Ports of Entry', #Immigration
            'Abolish ICE', #Immigration
            'Decriminalize entering the US illegally', #Immigration
+           'Reinstate Net Neutrality', #Technology
+           'Estate Tax', #Economics
+           'Postal Banking', #Economics
+           'Reparations for Slavery', #Economics
+           'Wealth Tax', #Economics
+           'Breaking up the largest banks', #Economics
+           'Support NAFTA', #Economics
+           'Raise Minimum Wage', #Labor
+           'Basic Income', #Labor
+           'Paid Family Leave', #Labor
+           'Paid Sick Leave', #Labor
+           'Limit "right-to-work" laws', #Labor
+           'Job guarantee', #Labor
+           'Iran Nuclear Deal', #Foreign
+           'Recognize Juan Guadió as Interim President of Venezuela', #Foreign
+           'Support two-state solution for Israel and Palestine', #Foreign
+           'Leverage aid to Israel', #Foreign
+           'Use tariffs against China', #Foreign
+           'Meet with Kim Jong-un', #Foreign
+           'Resume diplomatic relations with Bashar Al-Assad', #Foreign
+           'Withdraw troops from Afghanistan', #Defense
+           'Intervention in Syria', #Defense
+           'Military Intervention in Venezuela', #Defense
+           'Intervention in Yemen', #Defense
+           'Drone Strikes', #Defense
+           'Decrease the annual military budget', #Defense
            'Impeachment of Donald Trump', #Trump
            'Abolish the Electoral College', #Electoral
            'Abolish the filibuster', #Electoral
@@ -107,6 +122,7 @@ questions=['Tuition-Free Public College', #Education
            'Overturn Citizens United', #Campaign finance
            'Publicly funded elections', #Campaign finance
            'Democracy vouchers', #Campaign finance
+           'We the People amendment', #Campaign finance
            'Support right to abortion', #Abortion
            'Contraceptive mandate', #Abortion
            'Fund Planned Parenthood', #Abortion
@@ -119,9 +135,9 @@ questions=['Tuition-Free Public College', #Education
            'End Mandatory Minimum Sentencing for Nonviolent Drug Offenses', #Criminal
            'Job Placement Services for Released Offenders', #Criminal
            'Decriminalization of Sex Work', #Criminal
-           'Laws against LGBT discrimination',
-           'Same-sex marriage',
-           'Transgender Military Service',
+           'Laws against LGBT discrimination', #LGBT
+           'Same-sex marriage', #LGBT
+           'Transgender Military Service', #LGBT
            'Support the eventual Democratic nominee']
 
 candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
@@ -141,6 +157,16 @@ experience={'Ben':4365/21, 'Bid':2922/2+13161/21, 'Boo':2621/21+2740/71, 'Bul':2
             'San':5114/21+5844/27+2920/71, 'Ses':1461/27, 'Ste':0, 'Swa':2922/27, 'War':2922/21, 'Wil':0,
             'Yan':0}
 
+veracity={'Ben':3, 'Bid':3, 'Boo':3, 'Bul':3, 'But':3, 'Cas':3, 'de ':3,
+          'Del':3, 'Gab':3, 'Gil':3, 'Gra':3, 'Har':3, 'Hic':3, 'Ins':3,
+          'Klo':3, 'Mes':3, 'Mou':3, 'Oje':3, 'O\'R':3, 'Rya':3, 'San':3,
+          'Ses':3, 'Ste':3, 'Swa':3, 'War':3, 'Wil':3, 'Yan':3}
+
+maxexp = 0
+for a in experience:
+    if experience[a]/100 > maxexp:
+        maxexp = experience[a]/100
+
 candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
                  'Bul':'Steve Bullock',
                  'But':'Pete Buttigieg', 'Cas':'Julián Castro',
@@ -154,11 +180,25 @@ candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
                  'War':'Elizabeth Warren', 'Wil':'Marianne Williamson',
                  'Yan':'Andrew Yang'}
 
+pf_urls = {'Cas':'julian-castro', 'O\'R':'beto-orourke'}
+
 ages={'Ben':20507, 'Bid':28551, 'Boo':18896, 'Bul':20008, 'But':14246, 'Cas':16928, 'Del':21099,
       'de ':21807,
       'Gab':14528, 'Gil':19766, 'Gra':33125, 'Har':20546, 'Hic':25185, 'Ins':25548,
       'Klo':22175, 'Mes':17029, 'Mou':15429, 'Oje':18380, 'O\'R':17648, 'Rya':17355, 'San':28989, 'Ses':25242, 'Ste':23218, 'Swa':14675,
       'War':26145, 'Wil':25033, 'Yan':16809}
+
+minage = 1e100
+for a in ages:
+    if ages[a] < minage:
+        minage = ages[a]
+maxage = 0
+for a in ages:
+    if ages[a] > maxage:
+        maxage = ages[a]
+agedif = (maxage - minage)/7300
+
+priority=[len(questions), maxexp, agedif, 5, 5]
 
 local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Bid':[10, 10003, 1077580, 1001, 1093996],
@@ -195,11 +235,18 @@ abcounttotal = {'Ben':0,'Bid':0,'Boo':0,'Bul':0,'But':0,'Cas':0,'de ':0,'Del':0,
                 'War':0,'Wil':0,'Yan':0}
 #==END==
 
-priority=[len(questions), 21, 5, 5]
+def getPFstring(word):
+    s = ''
+    for a in word:
+        if a == ' ':
+            s += '-'
+        else:
+            s += a.lower()
+    return s
 
-ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
-preference=[]
+for a in candidate_names:
+    if not (a in pf_urls):
+        pf_urls[a] = getPFstring(candidate_names[a])
 
 def isInt(s):
     try:
@@ -207,6 +254,20 @@ def isInt(s):
         return True
     except ValueError:
         return False
+
+def isFloat(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+def removeNewLines(inp):
+    s = ''
+    for a in inp:
+        if a != '\n':
+            s += a
+    return s
 
 def printIdeSettings():
     n = 0
@@ -224,14 +285,17 @@ def printSettings():
     c.create_rectangle(50, 75, 50+priority[1]*5, 100, fill='orange')
     c.create_rectangle(50, 125, 50+priority[2]*5, 150, fill='green')
     c.create_rectangle(50, 175, 50+priority[3]*5, 200, fill='blue')
+    c.create_rectangle(50, 225, 50+priority[4]*5, 250, fill='purple')
     c.create_text(25, 37.5, text=priority[0])
-    c.create_text(25, 87.5, text=priority[1])
-    c.create_text(25, 137.5, text=priority[2])
+    c.create_text(25, 87.5, text=round(priority[1], 2))
+    c.create_text(25, 137.5, text=round(priority[2], 2))
     c.create_text(25, 187.5, text=priority[3])
+    c.create_text(25, 237.5, text=priority[4])
     c.create_text(50+priority[0]*5, 37.5, anchor=W, text='   Ideology')
     c.create_text(50+priority[1]*5, 87.5, anchor=W, text='   Experience')
     c.create_text(50+priority[2]*5, 137.5, anchor=W, text='   Age')
     c.create_text(50+priority[3]*5, 187.5, anchor=W, text='   Locality')
+    c.create_text(50+priority[4]*5, 237.5, anchor=W, text='   Veracity of statements')
     tk.update()
 
 def setIdePrefs():
@@ -252,10 +316,10 @@ def setIdePrefs():
             printIdeSettings()
             if n == 0:
                 break
-            elif n > 0 and n < 16:
+            elif n > 0 and n <= len(ide_priority):
                 a = input('Enter weight: ')
-                if isInt(a):
-                    ide_priority[n-1] = int(a)
+                if isFloat(a):
+                    ide_priority[n-1] = float(a)
                 else:
                     print('Invalid input.')
             else:
@@ -266,16 +330,18 @@ def setIdePrefs():
 def setPrefs():
     printSettings()
     while True:
-        n = input('Type the number of what you want to do.\n1. Set ideology weight\n2. Set experience weight\n3. Set age weight\n4. Set locality weight\n5. Continue\n')
+        n = input('Type the number of what you want to do.\n1. Set ideology weight\n2. Set experience weight\n3. Set age weight\n4. Set locality weight\n5. Set veracity weight\n6. Continue\n')
         if n == '1':
-            priority[0] = int(input('Enter ideology weight: '))
+            priority[0] = float(input('Enter ideology weight: '))
         elif n == '2':
-            priority[1] = int(input('Enter experience weight: '))
+            priority[1] = float(input('Enter experience weight: '))
         elif n == '3':
-            priority[2] = int(input('Enter age weight: '))
+            priority[2] = float(input('Enter age weight: '))
         elif n == '4':
-            priority[3] = int(input('Enter locality weight: '))
+            priority[3] = float(input('Enter locality weight: '))
         elif n == '5':
+            priority[4] = float(input('Enter veracity weight: '))
+        elif n == '6':
             break
         else:
             print('Invalid input.')
@@ -447,9 +513,53 @@ def getPreferences():
                     #==END==
                     m += 1
     for a in candidates:
+        response_pf = BeautifulSoup(get('https://www.politifact.com/personalities/' + pf_urls[a]).content, 'html.parser')
+        cl = response_pf.find('ul', {'class':'scorecard__chartlist chartlist'})
+        truths = {}
+        truthtypes = ['True', 'Mostly True', 'Half True', 'Mostly False', 'False', 'Pants on Fire']
+        try:
+            items = cl.find_all('li')
+            for b in items:
+                s = ''
+                cnt = b.find('span', {'class':'chartlist__count'}).getText()
+                n = 0
+                while cnt[n] == ' ' or cnt[n] == '\n':
+                    n += 1
+                while n < len(cnt) and cnt[n] != '\n' and cnt[n] != ' ':
+                    s += cnt[n]
+                    n += 1
+                trt = b.find('span', {'class':'chartlist__label'}).getText()
+                trt = removeNewLines(trt)
+                try:
+                    truths[trt] = int(s)
+                except ValueError:
+                    truths[trt] = 0
+        except AttributeError:
+            ib = response_pf.find('div', {'id':'statements-by'})
+            items = ib.find_all('img')
+            for b in items:
+                if b['alt'] in truthtypes:
+                    try:
+                        truths[b['alt']] += 1
+                    except KeyError:
+                        truths[b['alt']] = 1
+                if b['alt'] == 'Half-True':
+                    try:
+                        truths['Half True'] += 1
+                    except KeyError:
+                        truths['Half True'] = 1
+            for b in truthtypes:
+                if not (b in truths):
+                    truths[b] = 0
+        truth_sum = 0
+        for b in truths:
+            truth_sum += truths[b]
+        veracity[a] = (truths['True'] * 5 + truths['Mostly True'] * 4 + truths['Half True'] * 3 + truths['Mostly False'] * 2 + truths['False']) / truth_sum
+    for a in candidates:
         candidates[a] *= priority[0]/len(questions)
-        candidates[a] += (experience[a]/100)*(priority[1]/21)
-        candidates[a] -= (ages[a]/7300)*(priority[2]/5)
+        candidates[a] += (experience[a]/100)*(priority[1]/maxexp)
+        candidates[a] -= (ages[a]/7300)*(priority[2]/agedif)
+        candidates[a] += veracity[a] * priority[4] / 5
         y = 0
         while y < 5:
             if user_local[y] == local[a][y]:
@@ -457,7 +567,6 @@ def getPreferences():
             y+=1
         preference.append([candidate_names[a], candidates[a]])
     sort()
-    n = 1
     c.delete('all')
     tk.update()
 
@@ -471,13 +580,16 @@ def sum_notation(x):
 
 def printResults():
     n = 0
+    displayn = 0
     while n < len(preference):
+        if n >= 0 and preference[n][1] != preference[n-1][1]:
+            displayn = n + 1
         if preference[n][0] in withdrawn:
             c.create_text(350, sum_notation(n+1), anchor=N, font=('Helvetica', int(55-1.9*n)), text = preference[n][0], fill='red')
-            c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(55-1.9*n)), text = str(n+1)+'. ', fill='red')
+            c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(55-1.9*n)), text = str(displayn)+'. ', fill='red')
         else:
             c.create_text(350, sum_notation(n+1), anchor=N, font=('Helvetica', int(55-1.9*n)), text = preference[n][0])
-            c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(55-1.9*n)), text = str(n+1)+'. ')
+            c.create_text(20, sum_notation(n+1), anchor=NW, font=('Helvetica', int(55-1.9*n)), text = str(displayn)+'. ')
         n+=1
 
 setPrefs()
@@ -489,4 +601,4 @@ c.create_text(350, 400, font=('Helvetica', 50), text='Processing...')
 tk.update()
 getPreferences()
 printResults()
-    
+tk.update()
