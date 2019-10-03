@@ -3,8 +3,8 @@ from requests import get
 from tkinter import *
 from location_data import *
 
-#ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-ide_priority=[2.0, 3.0, 2.0, 2.5, 2.0, 1, 1.5, 2.0, 2.0, 1.5, 0.5, 3.0, 2.0, 2.0, 2.0, 2.0, 1]
+ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+#ide_priority=[2.0, 3.0, 2.0, 2.5, 2.0, 1, 1.5, 2.0, 2.0, 1.5, 0.5, 3.0, 2.0, 2.0, 2.0, 2.0, 1]
 
 preference=[]
 
@@ -22,7 +22,7 @@ issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, #Gun control
         yes, yes, yes, #Health care
         no, no, yes, yes, yes, yes, abstain, yes, #Immigration and border security
-        yes, #Technology
+        yes, abstain, #Technology
         yes, yes, no, yes, yes, yes, #Economics
         no, yes, yes, yes, no, yes, #Labor and welfare issues
         yes, yes, yes, abstain, abstain, abstain, yes, #Foreign policy
@@ -35,25 +35,26 @@ issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, #LGBT issues
         yes] #Candidate solidarity
 
-user_local = [6, 6001, 626000, 615, 691070]
+user_local = [0, 0, 0, 0, 0, 0]
+#user_local = [6, 6001, 626000, 615, 691070]
 
 categories=[['Education', 0, 5],
             ['Environmental issues', 6, 12],
             ['Gun control', 13, 15],
             ['Health care', 16, 18],
             ['Immigration and border security', 19, 26],
-            ['Technology', 27, 27],
-            ['Economics', 28, 33],
-            ['Labor and welfare issues', 34, 39],
-            ['Foreign policy', 40, 46],
-            ['Defense', 47, 52],
-            ['Donald Trump', 53, 53],
-            ['Electoral reform', 54, 62],
-            ['Campaign finance', 63, 67],
-            ['Abortion', 68, 71],
-            ['Criminal justice', 72, 79],
-            ['LGBT issues', 80, 82],
-            ['Candidate solidarity', 83, 83]]
+            ['Technology', 27, 28],
+            ['Economics', 29, 34],
+            ['Labor and welfare issues', 35, 40],
+            ['Foreign policy', 41, 47],
+            ['Defense', 48, 53],
+            ['Donald Trump', 54, 54],
+            ['Electoral reform', 55, 63],
+            ['Campaign finance', 64, 68],
+            ['Abortion', 69, 72],
+            ['Criminal justice', 73, 80],
+            ['LGBT issues', 81, 83],
+            ['Candidate solidarity', 84, 84]]
 
 questions=['Tuition-Free Public College', #Education
            'Debt relief for student loans', #Education
@@ -83,6 +84,7 @@ questions=['Tuition-Free Public College', #Education
            'Abolish ICE', #Immigration
            'Decriminalize entering the US illegally', #Immigration
            'Reinstate Net Neutrality', #Technology
+           'Treat personal data as private property', #Technology
            'Estate Tax', #Economics
            'Postal Banking', #Economics
            'Reparations for Slavery', #Economics
@@ -346,7 +348,8 @@ def setPrefs():
         else:
             print('Invalid input.')
         printSettings()
-    setIdePrefs()
+    if priority[0] != 0:
+        setIdePrefs()
 
 def locate():
     user_local[0] = 0
@@ -593,10 +596,10 @@ def printResults():
         n+=1
 
 setPrefs()
-#locate()
+locate()
 c.delete('all')
 tk.update()
-#takeQuiz()
+takeQuiz()
 c.create_text(350, 400, font=('Helvetica', 50), text='Processing...')
 tk.update()
 getPreferences()
