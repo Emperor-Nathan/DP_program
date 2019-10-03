@@ -3,8 +3,8 @@ from requests import get
 from tkinter import *
 from location_data import *
 
-ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-#ide_priority=[2.0, 3.0, 2.0, 2.5, 2.0, 1, 1.5, 2.0, 2.0, 1.5, 0.5, 3.0, 2.0, 2.0, 2.0, 2.0, 1]
+#ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+ide_priority=[2.0, 3.0, 2.0, 2.5, 2.0, 1, 1.5, 2.0, 2.0, 1.5, 0.5, 3.0, 2.0, 2.0, 2.0, 2.0, 1]
 
 preference=[]
 
@@ -28,33 +28,33 @@ issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, abstain, abstain, abstain, yes, #Foreign policy
         abstain, abstain, abstain, no, abstain, yes, #Defense
         yes, #Donald Trump
-        yes, yes, yes, no, yes, yes, yes, abstain, yes, #Electoral reform
+        yes, yes, yes, no, yes, yes, yes, abstain, yes, yes, #Electoral reform
         yes, yes, yes, yes, yes, #Campaign finance
         yes, yes, abstain, no, #Abortion
         yes, abstain, abstain, yes, yes, yes, yes, yes, #Criminal justice
         yes, yes, yes, #LGBT issues
         yes] #Candidate solidarity
 
-user_local = [0, 0, 0, 0, 0, 0]
-#user_local = [6, 6001, 626000, 615, 691070]
+#user_local = [0, 0, 0, 0, 0, 0]
+user_local = [6, 6001, 626000, 615, 691070]
 
-categories=[['Education', 0, 5],
-            ['Environmental issues', 6, 12],
-            ['Gun control', 13, 15],
-            ['Health care', 16, 18],
-            ['Immigration and border security', 19, 26],
-            ['Technology', 27, 28],
-            ['Economics', 29, 34],
-            ['Labor and welfare issues', 35, 40],
-            ['Foreign policy', 41, 47],
-            ['Defense', 48, 53],
-            ['Donald Trump', 54, 54],
-            ['Electoral reform', 55, 63],
-            ['Campaign finance', 64, 68],
-            ['Abortion', 69, 72],
-            ['Criminal justice', 73, 80],
-            ['LGBT issues', 81, 83],
-            ['Candidate solidarity', 84, 84]]
+categories=[['Education', 6],
+            ['Environmental issues', 7],
+            ['Gun control', 3],
+            ['Health care', 3],
+            ['Immigration and border security', 8],
+            ['Technology', 2],
+            ['Economics', 6],
+            ['Labor and welfare issues', 6],
+            ['Foreign policy', 7],
+            ['Defense', 6],
+            ['Donald Trump', 1],
+            ['Electoral reform', 10],
+            ['Campaign finance', 5],
+            ['Abortion', 4],
+            ['Criminal justice', 8],
+            ['LGBT issues', 3],
+            ['Candidate solidarity', 1]]
 
 questions=['Tuition-Free Public College', #Education
            'Debt relief for student loans', #Education
@@ -486,6 +486,9 @@ def getPreferences():
     del tables[len(tables)-1]
     n = 0
     m = 0
+    q = 0
+    cat_count = 0
+    cat_count_old = 0
     for a in tables:
         n += m
         m = 0
@@ -501,12 +504,12 @@ def getPreferences():
             if k in candidates:
                 del columns[0]
                 for d in columns:
-                    v = 1
-                    q = 0
-                    while q < len(categories):
-                        if n+m >= categories[q][1] and n+m <= categories[q][2]:
-                            v *= ide_priority[q]
+                    if cat_count == categories[q][1]:
+                        cat_count = 0
                         q += 1
+                    else:
+                        cat_count += 1
+                    v = ide_priority[q]
                     if str(d)[17]+str(d)[18] == issues[n+m]:
                         candidates[k] += v
                     elif (str(d)[17]+str(d)[18] == no and issues[n+m]==yes) or (str(d)[17]+str(d)[18]==yes and issues[n+m]==no):
@@ -515,6 +518,9 @@ def getPreferences():
                         abcounttotal[k]+=1
                     #==END==
                     m += 1
+                cat_count_old = cat_count
+                cat_count = 0
+        cat_count = cat_count_old
     for a in candidates:
         response_pf = BeautifulSoup(get('https://www.politifact.com/personalities/' + pf_urls[a]).content, 'html.parser')
         cl = response_pf.find('ul', {'class':'scorecard__chartlist chartlist'})
@@ -596,10 +602,10 @@ def printResults():
         n+=1
 
 setPrefs()
-locate()
+#locate()
 c.delete('all')
 tk.update()
-takeQuiz()
+#takeQuiz()
 c.create_text(350, 400, font=('Helvetica', 50), text='Processing...')
 tk.update()
 getPreferences()
