@@ -3,8 +3,8 @@ from requests import get
 from tkinter import *
 from location_data import *
 
-#ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-ide_priority=[2.0, 3.0, 2.0, 2.5, 2.0, 1, 1.5, 2.0, 2.0, 1.5, 0.5, 3.0, 2.0, 2.0, 2.0, 2.0, 1]
+ide_priority=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+#ide_priority=[2.0, 3.0, 2.0, 2.5, 2.0, 1, 1.5, 2.0, 2.0, 1.5, 0.5, 3.0, 2.0, 2.0, 2.0, 2.0, 1]
 
 preference=[]
 
@@ -35,8 +35,8 @@ issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, #LGBT issues
         yes] #Candidate solidarity
 
-#user_local = [0, 0, 0, 0, 0, 0]
-user_local = [6, 6001, 626000, 615, 691070]
+user_local = [0, 0, 0, 0, 0, 0]
+#user_local = [6, 6001, 626000, 615, 691070]
 
 categories=[['Education', 6],
             ['Environmental issues', 7],
@@ -602,10 +602,10 @@ def printResults():
         n+=1
 
 setPrefs()
-#locate()
+locate()
 c.delete('all')
 tk.update()
-#takeQuiz()
+takeQuiz()
 c.create_text(350, 400, font=('Helvetica', 50), text='Processing...')
 tk.update()
 getPreferences()
