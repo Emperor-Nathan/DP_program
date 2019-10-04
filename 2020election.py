@@ -20,7 +20,7 @@ abstain='ab'
 issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, yes, yes, yes, yes, #Environmental issues
         yes, yes, yes, #Gun control
-        yes, yes, yes, #Health care
+        yes, yes, abstain, yes, #Health care
         no, no, yes, yes, yes, yes, abstain, yes, #Immigration and border security
         yes, abstain, #Technology
         yes, yes, no, yes, yes, yes, #Economics
@@ -41,7 +41,7 @@ user_local = [0, 0, 0, 0, 0, 0]
 categories=[['Education', 6],
             ['Environmental issues', 7],
             ['Gun control', 3],
-            ['Health care', 3],
+            ['Health care', 4],
             ['Immigration and border security', 8],
             ['Technology', 2],
             ['Economics', 6],
@@ -74,6 +74,7 @@ questions=['Tuition-Free Public College', #Education
            'Mandatory gun buybacks', #Gun
            'Support Single-Payer Healthcare System', #Health
            'Support Public Health Insurance Option', #Health
+           'Abolish private health insurance', #Health
            'Import Prescription Drugs from Canada', #Health
            'Proposed Trump Border Wall', #Immigration
            'Trump Travel Ban', #Immigration
@@ -602,8 +603,8 @@ def printResults():
         n+=1
 
 setPrefs()
-locate()
 c.delete('all')
+locate()
 tk.update()
 takeQuiz()
 c.create_text(350, 400, font=('Helvetica', 50), text='Processing...')
