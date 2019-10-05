@@ -18,7 +18,7 @@ no='no'
 abstain='ab'
  
 issues=[yes, yes, no, yes, yes, yes, #Education
-        yes, yes, yes, yes, yes, yes, yes, #Environmental issues
+        yes, yes, yes, yes, yes, yes, yes, yes, #Environmental issues
         yes, yes, yes, #Gun control
         yes, yes, abstain, yes, #Health care
         no, no, yes, yes, yes, yes, abstain, yes, #Immigration and border security
@@ -39,7 +39,7 @@ user_local = [0, 0, 0, 0, 0, 0]
 #user_local = [6, 6001, 626000, 615, 691070]
 
 categories=[['Education', 6],
-            ['Environmental issues', 7],
+            ['Environmental issues', 8],
             ['Gun control', 3],
             ['Health care', 4],
             ['Immigration and border security', 8],
@@ -69,6 +69,7 @@ questions=['Tuition-Free Public College', #Education
            'Paris Agreement', #Environment
            'Ban Fracking', #Environment
            'Ban Offshore Drilling', #Environment
+           'Declare climate change a national emergency', #Environment
            'Universal Background Checks', #Gun
            'Ban Assault Weapons', #Gun
            'Mandatory gun buybacks', #Gun
