@@ -22,7 +22,7 @@ issues=[yes, yes, no, yes, yes, yes, #Education
         yes, yes, yes, #Gun control
         yes, yes, abstain, yes, #Health care
         no, no, yes, yes, yes, yes, abstain, yes, #Immigration and border security
-        yes, abstain, #Technology
+        yes, abstain, no, #Technology
         yes, yes, no, yes, yes, yes, #Economics
         no, yes, yes, yes, no, yes, #Labor and welfare issues
         yes, yes, yes, abstain, abstain, abstain, yes, #Foreign policy
@@ -43,7 +43,7 @@ categories=[['Education', 6],
             ['Gun control', 3],
             ['Health care', 4],
             ['Immigration and border security', 8],
-            ['Technology', 2],
+            ['Technology', 3],
             ['Economics', 6],
             ['Labor and welfare issues', 6],
             ['Foreign policy', 7],
@@ -87,6 +87,7 @@ questions=['Tuition-Free Public College', #Education
            'Decriminalize entering the US illegally', #Immigration
            'Reinstate Net Neutrality', #Technology
            'Treat personal data as private property', #Technology
+           'CASE act', #Technology
            'Estate Tax', #Economics
            'Postal Banking', #Economics
            'Reparations for Slavery', #Economics
@@ -147,7 +148,7 @@ questions=['Tuition-Free Public College', #Education
 candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
             'Del':0, 'Gab':0, 'Gil':0, 'Gra':0, 'Har':0,
             'Hic':0, 'Ins':0, 'Klo':0, 'Mes':0,
-            'Mou':0, 'Oje':0, 'O\'R':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
+            'Mou':0, 'O\'R':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
             'War':0, 'Wil':0, 'Yan':0}
 
 withdrawn = []
@@ -203,6 +204,7 @@ for a in ages:
 agedif = (maxage - minage)/7300
 
 priority=[len(questions), maxexp, agedif, 5, 5]
+#priority=[len(question), 5, 5, 5, 5]
 
 local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Bid':[10, 10003, 1077580, 1001, 1093996],
@@ -447,7 +449,7 @@ def locate():
 def takeQuiz():
     n = 0
     print('For each question, type "yes", "no", or "abstain". Typing "y" or "n" will also suffice. This is not case-sensitive.\n')
-    while n < 72:
+    while n < len(questions):
         a = input(questions[n] + ': ')
         if a.lower() == 'yes' or a.lower() == 'y':
             issues[n] = yes
@@ -499,8 +501,9 @@ def getPreferences():
         for b in rows:
             m = 0
             columns = b.find_all('td')
-            k = str(columns[0])[21] + str(columns[0])[22] + str(columns[0])[23]
-            if 'Withdrawn' in str(columns[1]):
+            tkc = columns[0]['data-sort-value']
+            k = tkc[0] + tkc[1] + tkc[2]
+            if 'No' in columns[1].getText():
                 withdrawn.append(candidate_names[k])
             del columns[1]
             if k in candidates:
@@ -566,8 +569,13 @@ def getPreferences():
         for b in truths:
             truth_sum += truths[b]
         veracity[a] = (truths['True'] * 5 + truths['Mostly True'] * 4 + truths['Half True'] * 3 + truths['Mostly False'] * 2 + truths['False']) / truth_sum
+    h = 0
+    ht = 0
+    while h < len(ide_priority):
+        ht += ide_priority[h] * categories[h][1]
+        h += 1
     for a in candidates:
-        candidates[a] *= priority[0]/len(questions)
+        candidates[a] *= priority[0]/ht
         candidates[a] += (experience[a]/100)*(priority[1]/maxexp)
         candidates[a] -= (ages[a]/7300)*(priority[2]/agedif)
         candidates[a] += veracity[a] * priority[4] / 5
