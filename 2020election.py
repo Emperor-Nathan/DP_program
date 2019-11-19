@@ -149,8 +149,8 @@ questions=['Tuition-Free Public College', #Education
 candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
             'Del':0, 'Gab':0, 'Gil':0, 'Gra':0, 'Har':0,
             'Hic':0, 'Ins':0, 'Klo':0, 'Mes':0,
-            'Mou':0, 'O\'R':0, 'Pat':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
-            'War':0, 'Wil':0, 'Yan':0}#,'Oje':0}
+            'Mou':0, 'Oje':0, 'O\'R':0, 'Pat':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
+            'War':0, 'Wil':0, 'Yan':0}
 
 withdrawn = []
 
