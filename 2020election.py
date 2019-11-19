@@ -25,7 +25,7 @@ issues=[yes, yes, no, yes, yes, yes, #Education
         yes, abstain, no, #Technology
         yes, yes, no, yes, yes, yes, #Economics
         no, yes, yes, yes, no, yes, #Labor and welfare issues
-        yes, yes, yes, abstain, abstain, abstain, yes, #Foreign policy
+        yes, yes, yes, yes, abstain, abstain, abstain, yes, #Foreign policy
         abstain, abstain, abstain, no, abstain, yes, #Defense
         yes, #Donald Trump
         yes, yes, yes, no, yes, yes, yes, abstain, yes, yes, #Electoral reform
@@ -46,7 +46,7 @@ categories=[['Education', 6],
             ['Technology', 3],
             ['Economics', 6],
             ['Labor and welfare issues', 6],
-            ['Foreign policy', 7],
+            ['Foreign policy', 8],
             ['Defense', 6],
             ['Donald Trump', 1],
             ['Electoral reform', 10],
@@ -100,6 +100,7 @@ questions=['Tuition-Free Public College', #Education
            'Paid Sick Leave', #Labor
            'Limit "right-to-work" laws', #Labor
            'Job guarantee', #Labor
+           'Pardon Julian Assange', #Foreign
            'Iran Nuclear Deal', #Foreign
            'Recognize Juan Guadió as Interim President of Venezuela', #Foreign
            'Support two-state solution for Israel and Palestine', #Foreign
@@ -120,7 +121,7 @@ questions=['Tuition-Free Public College', #Education
            'Ban Voter ID Laws', #Electoral
            'District of Columbia statehood', #Electoral
            'Puerto Rico statehood', #Electoral
-           'End Felony Disenfranchisement', #Electoral
+           'End Felony Disenfranchisement after release', #Electoral
            'Expand/Reform Supreme Court', #Electoral
            'Make Election Day a federal holiday', #Electoral
            'No Corporate PAC Donations', #Campaign finance
@@ -148,23 +149,23 @@ questions=['Tuition-Free Public College', #Education
 candidates={'Ben':0, 'Bid':0, 'Boo':0, 'Bul':0, 'But':0, 'Cas':0, 'de ':0,
             'Del':0, 'Gab':0, 'Gil':0, 'Gra':0, 'Har':0,
             'Hic':0, 'Ins':0, 'Klo':0, 'Mes':0,
-            'Mou':0, 'O\'R':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
-            'War':0, 'Wil':0, 'Yan':0}
+            'Mou':0, 'O\'R':0, 'Pat':0, 'Rya':0, 'San':0, 'Ses':0, 'Ste':0, 'Swa':0,
+            'War':0, 'Wil':0, 'Yan':0}#,'Oje':0}
 
 withdrawn = []
 
-experience={'Ben':4365/21, 'Bid':2922/2+13161/21, 'Boo':2621/21+2740/71, 'Bul':2919/3,
+experience={'Ben':4365/21, 'Bid':2922/2+13161/21, 'Blo':4382/71, 'Boo':2621/21+2740/71, 'Bul':2919/3,
             'But':2926/71, 'Cas':907/15+1877/71, 'de ':2576/71, 'Del':2191/27,
             'Gab':2922/27+720/109, 'Gil':4360/21+754/27, 'Gra':4383/21+1460/109,
             'Har':1461/21, 'Hic':2919/3+2731/71,
             'Ins':2919/3+4825/27+730/27+1463/109, 'Klo':5114/21, 'Mes':2121/71,
-            'Mou':2192/27, 'Oje':774/108, 'O\'R':2191/27, 'Rya':6575/27+715/108,
+            'Mou':2192/27, 'Oje':774/108, 'O\'R':2191/27, 'Pat':2926/3, 'Rya':6575/27+715/108,
             'San':5114/21+5844/27+2920/71, 'Ses':1461/27, 'Ste':0, 'Swa':2922/27, 'War':2922/21, 'Wil':0,
             'Yan':0}
 
-veracity={'Ben':3, 'Bid':3, 'Boo':3, 'Bul':3, 'But':3, 'Cas':3, 'de ':3,
+veracity={'Ben':3, 'Bid':3, 'Blo':3, 'Boo':3, 'Bul':3, 'But':3, 'Cas':3, 'de ':3,
           'Del':3, 'Gab':3, 'Gil':3, 'Gra':3, 'Har':3, 'Hic':3, 'Ins':3,
-          'Klo':3, 'Mes':3, 'Mou':3, 'Oje':3, 'O\'R':3, 'Rya':3, 'San':3,
+          'Klo':3, 'Mes':3, 'Mou':3, 'Oje':3, 'O\'R':3, 'Pat':3, 'Rya':3, 'San':3,
           'Ses':3, 'Ste':3, 'Swa':3, 'War':3, 'Wil':3, 'Yan':3}
 
 maxexp = 0
@@ -172,7 +173,7 @@ for a in experience:
     if experience[a]/100 > maxexp:
         maxexp = experience[a]/100
 
-candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
+candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Blo':'Michael Bloomberg', 'Boo':'Cory Booker',
                  'Bul':'Steve Bullock',
                  'But':'Pete Buttigieg', 'Cas':'Julián Castro',
                  'de ':'Bill de Blasio',
@@ -180,17 +181,17 @@ candidate_names={'Ben':'Michael Bennet', 'Bid':'Joe Biden', 'Boo':'Cory Booker',
                  'Gil':'Kirsten Gillibrand', 'Gra':'Mike Gravel',
                  'Har':'Kamala Harris', 'Hic':'John Hickenlooper',
                  'Ins':'Jay Inslee', 'Klo':'Amy Klobuchar', 'Mes':'Wayne Messam',
-                 'Mou':'Seth Moulton',  'Oje':'Richard Ojeda', 'O\'R':'Beto O\'Rourke', 'Rya':'Tim Ryan',
+                 'Mou':'Seth Moulton', 'Oje':'Richard Ojeda', 'O\'R':'Beto O\'Rourke', 'Pat':'Deval Patrick','Rya':'Tim Ryan',
                  'San':'Bernie Sanders', 'Ses':'Joe Sestak', 'Ste':'Tom Steyer', 'Swa':'Eric Swalwell',
                  'War':'Elizabeth Warren', 'Wil':'Marianne Williamson',
                  'Yan':'Andrew Yang'}
 
 pf_urls = {'Cas':'julian-castro', 'O\'R':'beto-orourke'}
 
-ages={'Ben':20507, 'Bid':28551, 'Boo':18896, 'Bul':20008, 'But':14246, 'Cas':16928, 'Del':21099,
+ages={'Ben':20507, 'Bid':28551, 'Blo':28830, 'Boo':18896, 'Bul':20008, 'But':14246, 'Cas':16928, 'Del':21099,
       'de ':21807,
       'Gab':14528, 'Gil':19766, 'Gra':33125, 'Har':20546, 'Hic':25185, 'Ins':25548,
-      'Klo':22175, 'Mes':17029, 'Mou':15429, 'Oje':18380, 'O\'R':17648, 'Rya':17355, 'San':28989, 'Ses':25242, 'Ste':23218, 'Swa':14675,
+      'Klo':22175, 'Mes':17029, 'Mou':15429, 'Oje':18350, 'O\'R':17648, 'Pat':23549, 'Rya':17355, 'San':28989, 'Ses':25242, 'Ste':23218, 'Swa':14675,
       'War':26145, 'Wil':25033, 'Yan':16809}
 
 minage = 1e100
@@ -204,10 +205,11 @@ for a in ages:
 agedif = (maxage - minage)/7300
 
 priority=[len(questions), maxexp, agedif, 5, 5]
-#priority=[len(question), 5, 5, 5, 5]
+#priority=[len(questions), 5, 5, 5, 5]
 
 local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Bid':[10, 10003, 1077580, 1001, 1093996],
+         'Blo':[36, -1, 3651000, -1, -1],
          'Boo':[34, 34013, 3451000, -1, 3451000],
          'Bul':[30, 30049, 3035600, 3001, 3091722],
          'But':[18, 18141, 1871000, 1802, -1],
@@ -223,11 +225,12 @@ local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Klo':[27, 27053, 2744000, 2705, 2743000],
          'Mes':[12, 12011, 1245975, 1220, 1292236],
          'Mou':[25, 25009, 2559105, 2506, 2559105],
-         'Oje':[54, -1, -1, 5403, -1],
+         'Oje':[54, -1, -1, -1, -1],
          'O\'R':[48, 48141, 4824000, 4816, 4824000],
+         'Pat':[25, 25021, 2541690, -1, 2541275],
          'Rya':[39, 39155, 3955196, 3913, -1],
          'San':[50, 50007, 5010675, 5001, 5010675],
-         'Ses':[42, -1, -1, -1, -1],
+         'Ses':[51, -1, -1, -1, -1],
          'Ste':[6, 6081, 609066, 614, 691370],
          'Swa':[6, 6001, 620018, 615, 691660],
          'War':[25, 25017, 2511000, -1, 2511000],
@@ -235,9 +238,9 @@ local = {'Ben':[8, 8031, 820000, 801, 891007],
          'Yan':[36, 36061, 3651000, -1, 3644919]}
 
 #==BEGIN==
-abcounttotal = {'Ben':0,'Bid':0,'Boo':0,'Bul':0,'But':0,'Cas':0,'de ':0,'Del':0,
+abcounttotal = {'Ben':0,'Bid':0,'Blo':0,'Boo':0,'Bul':0,'But':0,'Cas':0,'de ':0,'Del':0,
                 'Gab':0,'Gil':0,'Gra':0,'Har':0,'Hic':0,'Ins':0,'Klo':0,'Mes':0,
-                'Mou':0,'Oje':0,'O\'R':0,'Rya':0,'San':0,'Ses':0,'Ste':0,'Swa':0,
+                'Mou':0,'Oje':0,'O\'R':0,'Pat':0,'Rya':0,'San':0,'Ses':0,'Ste':0,'Swa':0,
                 'War':0,'Wil':0,'Yan':0}
 #==END==
 
@@ -307,6 +310,7 @@ def printSettings():
 def setIdePrefs():
     n = 0
     printIdeSettings()
+    tk.update()
     while True:
         s='Type the number of what you want to set.\n0. Continue'
         q=0
@@ -320,6 +324,7 @@ def setIdePrefs():
         else:
             n = int(n)
             printIdeSettings()
+            tk.update()
             if n == 0:
                 break
             elif n > 0 and n <= len(ide_priority):
@@ -331,6 +336,7 @@ def setIdePrefs():
             else:
                 print('Invalid input.')
             printIdeSettings()
+            tk.update()
             
 
 def setPrefs():
@@ -501,25 +507,41 @@ def getPreferences():
         for b in rows:
             m = 0
             columns = b.find_all('td')
-            tkc = columns[0]['data-sort-value']
-            k = tkc[0] + tkc[1] + tkc[2]
-            if 'No' in columns[1].getText():
-                withdrawn.append(candidate_names[k])
-            del columns[1]
-            if k in candidates:
+            try:
+                can_name = b.find('th')
+                tkc = can_name.find('span')['data-sort-value']
+            except AttributeError:
+                can_name = columns[0]
                 del columns[0]
-                for d in columns:
+                tkc = can_name.find('span')['data-sort-value']
+            k = tkc[0] + tkc[1] + tkc[2]
+            if 'No' in columns[0].getText():
+                withdrawn.append(candidate_names[k])
+            del columns[0]
+            if k in candidates:
+                for dq in columns:
+                    try:
+                        d = dq['class']
+                    except KeyError:
+                        if '#9F9' in dq['style']:
+                            d = 'table-yes'
+                        elif '#F99' in dq['style']:
+                            d = 'table-no'
+                        elif '#FFB' in dq['style']:
+                            d = 'table-partial'
+                        else:
+                            d = 'unknown table-unknown'
                     if cat_count == categories[q][1]:
                         cat_count = 0
                         q += 1
                     else:
                         cat_count += 1
                     v = ide_priority[q]
-                    if str(d)[17]+str(d)[18] == issues[n+m]:
+                    if str(d)[6]+str(d)[7] == issues[n+m]:
                         candidates[k] += v
-                    elif (str(d)[17]+str(d)[18] == no and issues[n+m]==yes) or (str(d)[17]+str(d)[18]==yes and issues[n+m]==no):
+                    elif (str(d)[6]+str(d)[7] == no and issues[n+m]==yes) or (str(d)[6]+str(d)[7]==yes and issues[n+m]==no):
                         candidates[k] -= v #==BEGIN==
-                    elif str(d)[17]+str(d)[18] != 'pa':
+                    elif str(d)[6]+str(d)[7] != 'pa':
                         abcounttotal[k]+=1
                     #==END==
                     m += 1
